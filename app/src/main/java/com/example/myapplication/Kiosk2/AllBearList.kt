@@ -15,5 +15,4 @@ class AllBearList:Food {
         val formatted = String.format("%-15s %.2f %s", bearName, bearPrice,bearExpain)
         println(formatted)
     }
-
 }

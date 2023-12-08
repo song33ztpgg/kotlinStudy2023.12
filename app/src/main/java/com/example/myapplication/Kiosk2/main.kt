@@ -29,6 +29,7 @@ suspend fun main() {
     val cancel = mutableListOf<Cancel>(Cancel("취소", "모든 예약 제품을 취소합니다"))
 
     val myOrderList = mutableListOf<String>()
+    val myBuyList = mutableListOf<String>()
 
     while (true) {
         display(burger[0], bear[0], drink[0], order[0], cancel[0])
@@ -132,7 +133,11 @@ suspend fun main() {
 
                     when (readLine().toString().toInt()) {
                         1 -> {
-                            println("구매하였습니다")
+                            println("구매 완료 하였습니다")
+
+                            for(i in myOrderList){
+                                myBuyList.add(i)
+                            }
                             myOrderList.clear()
                             delay(1500)
                         }
@@ -175,6 +180,48 @@ suspend fun main() {
                 }
 
             }
+            6->{
+                println("\n\n\n")
+                val countMap = myBuyList.groupingBy { it }.eachCount()
+                var myListCount = 1
+                for ((item, count) in countMap) {
+                    if (count > 0) {
+
+                        val buyIndex = myBuyList.indexOf(item)
+                        if (buyIndex != -1) {
+//                            println( String.format("%d.  %-15s ||  %.2f (%-2d개) ||%s",myListCount,myBuyList[buyIndex], myBuyList[buyIndex],count, myBuyList[buyIndex]))
+                            println(myListCount)
+                            println(myBuyList[buyIndex])
+                            println(myBuyList[buyIndex])
+                            println( count)
+                            println( myBuyList[buyIndex])
+
+                            myListCount++
+                        }
+
+//                        val bugerIndex = burgerNames.indexOf(item)
+//                        if (bugerIndex != -1) {
+//                            println( String.format("%d.  %-15s ||  %.2f (%-2d개) ||%s",myListCount,burgerNames[bugerIndex], burgerPrice[bugerIndex]*count,count, burgerExpain[bugerIndex]))
+//
+//                            myListCount++
+//                        }
+//
+//                        val bearIndex = bearNames.indexOf(item)
+//                        if (bearIndex != -1) {
+//                            println( String.format("%d.  %-15s ||  %.2f (%-2d개) ||%s",myListCount,bearNames[bearIndex], bearPrice[bearIndex]*count,count, bearExpain[bearIndex]))
+//                            myListCount++
+//                        }
+
+
+                    }
+                }
+
+//                for(i in myBuyList){
+//                    println(i)
+//                }
+                println("판매기록")
+                delay(3000)
+            }
         }
 
     }
@@ -202,6 +249,8 @@ fun display(burger: Burger, bear: Bear, drink: Drink, order: Order, cancel: Canc
     order.view()
     print("5. ")
     cancel.view()
+    print("6. ")
+    println("구매목록")
 
 }
 
